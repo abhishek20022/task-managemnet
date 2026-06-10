@@ -69,3 +69,93 @@ exports.GetTasks = async (req, res) => {
       });
     }
   };
+
+  // Update Task
+exports.UpdateTask = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { title, description, status } = req.body;
+      const userId = req.user.id;
+      const role = req.userDetails?.role || req.user?.role || req.user?.accountType;
+  
+      const task = await Task.findById(id);
+      if (!task) {
+        return res.status(404).json({
+          success: false,
+          message: "Task not found",
+        });
+      }
+  
+      // Check permissions: regular user can only update their own tasks
+      if (role !== "Admin" && task.createdBy.toString() !== userId.toString()) {
+        return res.status(403).json({
+          success: false,
+          message: "Access denied: You can only update your own tasks",
+        });
+      }
+  
+      if (title !== undefined) task.title = title;
+      if (description !== undefined) task.description = description;
+      if (status !== undefined) task.status = status;
+  
+      await task.save();
+  
+      // Log Activity
+      await logActivity(userId, "task_update");
+  
+      return res.status(200).json({
+        success: true,
+        message: "Task updated successfully",
+        task,
+      });
+    } catch (error) {
+      // console.error("UpdateTask Error:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to update Task",
+        error: error.message,
+      });
+    }
+  };
+
+  exports.DeleteTask = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const userId = req.user.id;
+      const role = req.userDetails?.role || req.user?.role || req.user?.accountType;
+  
+      const task = await Task.findById(id);
+      if (!task) {
+        return res.status(404).json({
+          success: false,
+          message: "Task not found",
+        });
+      }
+  
+      // Check permissions: regular user can only delete their own tasks, Admin can delete any
+      if (role !== "Admin" && task.createdBy.toString() !== userId.toString()) {
+        return res.status(403).json({
+          success: false,
+          message: "Access denied: You can only delete your own tasks",
+        });
+      }
+  
+      await Task.findByIdAndDelete(id);
+  
+      // Log Activity
+      await logActivity(userId,  "task_delete");
+  
+      return res.status(200).json({
+        success: true,
+        message: "Task deleted successfully",
+      });
+    } catch (error) {
+      // console.error("DeleteTask Error:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to delete Task",
+        error: error.message,
+      });
+    }
+  };
+  
