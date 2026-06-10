@@ -9,6 +9,7 @@ require("dotenv").config()
 
 const userRoutes=require("./routes/user.routes")
 const taskRoutes=require("./routes/task.routes")
+const adminRoutes=require("./routes/admin.routes")
 
 const app=express();
 
@@ -25,6 +26,7 @@ app.use(express.json());
 
 app.use("/api/auth",userRoutes)// user routes
 app.use("/api/tasks", taskRoutes);//task routes
+app.use("/api/admin", adminRoutes);//Admin routes
 
 
 app.get("/test",(req,res)=>{
