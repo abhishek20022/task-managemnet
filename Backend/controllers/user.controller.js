@@ -53,3 +53,80 @@ exports.signUp = async (req, res) => {
       });
     }
   };
+
+  //Login
+
+  exports.Login = async (req, res) => {
+    try {
+      // data from body
+      const { email, password } = req.body;
+      // validate data
+  
+      if (!email || !password) {
+        return res.status(400).json({
+          success: false,
+          message: "All fields are required, please try again",
+        });
+      }
+  
+      //user check exist or not
+      const user = await User.findOne({ email });
+  
+      // If user not found with provided email
+      if (!user) {
+        return res.status(401).json({
+          success: false,
+          message: "User is not registered please signup first",
+        });
+      }
+  
+      // Check if user status is Inactive
+      if (user.status === "Inactive") {
+        return res.status(403).json({
+          success: false,
+          message: "Your account is deactivated. Please contact an admin.",
+        });
+      }
+  
+      // Generate JWT token and Compare Password
+      if (await bcrypt.compare(password, user.password)) {
+        const token = jwt.sign(
+          { email: user.email, id: user._id, role: user.role, accountType: user.role },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: "24h",
+          }
+        );
+  
+        // Save token to user document in database
+        user.token = token;
+        user.password = undefined;
+  
+        // Log login activity
+        //await logActivity(user._id, "Login");
+  
+        //create cookie and send response
+        const options = {
+          expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+          httpOnly: true,
+        };
+        res.cookie("token", token, options).status(200).json({
+          success: true,
+          token,
+          user,
+          message: "Logged in Successfully",
+        });
+      } else {
+        return res.status(401).json({
+          success: false,
+          message: "Password Is incorrect",
+        });
+      }
+    } catch (error) {
+      // console.log(error);
+      return res.status(500).json({
+        success: false,
+        message: "Login Failure, please try again",
+      });
+    }
+  };
