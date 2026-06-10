@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User=require("../models/user.model")
+const  { logActivity } = require("../utils/activitylogger");
+
 
 exports.signUp = async (req, res) => {
     try {
@@ -103,7 +105,7 @@ exports.signUp = async (req, res) => {
         user.password = undefined;
   
         // Log login activity
-        //await logActivity(user._id, "Login");
+        await logActivity(user._id, "login");
   
         //create cookie and send response
         const options = {
