@@ -1,11 +1,17 @@
-function App() {
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Auth from "./Pages/Auth";
+import TasksBoard from "./Pages/TasksBoard";
+
+const App = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <h1 className="text-5xl font-bold text-blue-600">
-        Tailwind CSS Working 🚀
-      </h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Auth />} />
+        <Route path="/dashboard/tasks" element={<TasksBoard />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
