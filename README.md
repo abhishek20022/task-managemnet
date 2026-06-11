@@ -2,6 +2,19 @@
 
 A modern full-stack **Task Management System** built with **React, Redux Toolkit, Tailwind CSS, Node.js, Express.js, and MongoDB**. The application provides secure authentication, role-based access control, task management, and an admin dashboard for monitoring users and activities.
 
+## 🌐 Live Demo
+
+**Frontend:**
+https://task-managemnet.vercel.app
+
+**Backend API:**
+https://task-managemnet-7c16.onrender.com/api
+
+**GitHub Repository:**
+https://github.com/abhishek20022/task-managemnet
+
+---
+
 ## ✨ Features
 
 ### 👤 Authentication
@@ -46,9 +59,9 @@ A modern full-stack **Task Management System** built with **React, Redux Toolkit
 
 ---
 
-# 🛠️ Tech Stack
+## 🛠️ Tech Stack
 
-## Frontend
+### Frontend
 
 * React.js
 * Redux Toolkit
@@ -59,11 +72,11 @@ A modern full-stack **Task Management System** built with **React, Redux Toolkit
 * React Toastify
 * React Icons
 
-## Backend
+### Backend
 
 * Node.js
 * Express.js
-* MongoDB
+* MongoDB Atlas
 * Mongoose
 * JWT Authentication
 * Bcrypt.js
@@ -71,9 +84,9 @@ A modern full-stack **Task Management System** built with **React, Redux Toolkit
 
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
 
-```
+```text
 Task-Management/
 │
 ├── Frontend/
@@ -95,15 +108,15 @@ Task-Management/
 
 ---
 
-# ⚙️ Installation
+## ⚙️ Installation
 
-## Clone Repository
+### Clone Repository
 
 ```bash
 git clone https://github.com/abhishek20022/task-managemnet.git
 ```
 
-## Frontend Setup
+### Frontend Setup
 
 ```bash
 cd Frontend
@@ -111,7 +124,7 @@ npm install
 npm run dev
 ```
 
-## Backend Setup
+### Backend Setup
 
 ```bash
 cd Backend
@@ -121,7 +134,7 @@ npm start
 
 ---
 
-# 🔑 Environment Variables
+## 🔑 Environment Variables
 
 ### Backend (.env)
 
@@ -139,7 +152,7 @@ VITE_BASE_URL=http://localhost:3000/api
 
 ---
 
-# 📌 User Flow
+## 📌 User Flow
 
 1. Register or Login
 2. Access Dashboard
@@ -150,11 +163,7 @@ VITE_BASE_URL=http://localhost:3000/api
 
 ---
 
-
-
----
-
-# 🔮 Future Improvements
+## 🔮 Future Improvements
 
 * Email Notifications
 * File Attachments
@@ -166,7 +175,7 @@ VITE_BASE_URL=http://localhost:3000/api
 
 ---
 
-# 👨‍💻 Author
+## 👨‍💻 Author
 
 **Abhishek Kumar**
 
@@ -174,6 +183,6 @@ VITE_BASE_URL=http://localhost:3000/api
 
 ---
 
-# ⭐ Support
+## ⭐ Support
 
 If you like this project, consider giving it a ⭐ on GitHub.
