@@ -86,7 +86,7 @@ const Sidebar = () => {
             animate={{ opacity: 1 }}
             className="text-xl font-bold bg-linear-to-r from-indigo-650 via-purple-650 to-pink-650 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent flex items-center gap-2"
           >
-            <span>Tasks</span>
+            <span>TaskFlow</span>
           </motion.h1>
         )}
         {isCollapsed && (
